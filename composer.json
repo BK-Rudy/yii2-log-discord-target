@@ -21,7 +21,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "betsuno\\log\\": "src/"
+            "thtmorais\\log\\": "src/"
         }
     }
 }
