@@ -9,12 +9,12 @@ You should avoid to use this target on a frequent events because of restriction 
 
 Execute following command in shell:
 ```shell
-composer require betsuno/yii2-log-discord-target
+composer require thtmorais/yii2-log-discord-target
 ```
 
 Or add following in your `composer.json` require section, and run `composer install` in your shell
 ```
-"betsuno/yii2-log-discord-target": "*"
+"thtmorais/yii2-log-discord-target": "*"
 ```
 
 ## Configuration and usage
@@ -22,7 +22,7 @@ Or add following in your `composer.json` require section, and run `composer inst
 Add something as following in your yii config into the `components` section
 ```
 'log' => [
-    'class'     => '\betsuno\yii\log\DiscordTarget',
+    'class'     => '\thtmorais\log\DiscordTarget',
     'url'       => 'WEBHOOK_URL',                 // Your WebHook URL
     //'pattern' => "{category}: {level}\n{text}", // Optionally you can override default message pattern
 ]
