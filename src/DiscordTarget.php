@@ -1,4 +1,4 @@
-<?php namespace betsuno\yii\log;
+<?php namespace thtmorais\log;
 
 use Exception;
 use Throwable;
@@ -11,7 +11,7 @@ use yii\log\Target;
 
 /**
  * Class DiscordTarget
- * @package betsuno\yii\log
+ * @package thtmorais\log
  * @property-write string $url
  */
 class DiscordTarget extends Target
