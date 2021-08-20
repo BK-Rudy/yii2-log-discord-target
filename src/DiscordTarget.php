@@ -92,7 +92,19 @@ class DiscordTarget extends Target
 	 */
 	private function sendWebHook($message)
 	{
+
+		// Create a file in the  temp directory and put the message in it
+		$tempFilePath = sys_get_temp_dir() . '/' . uniqid("log") . '.txt';
+		file_put_contents($tempFilePath, $message);
+		
+		if (function_exists('curl_file_create')) { // php 5.5+
+			$curlFile = curl_file_create($tempFilePath);
+		} else {
+			$curlFile = '@' . realpath($tempFilePath);
+		}
+		
 		$ch = curl_init($this->url);
+		
 		curl_setopt_array($ch, [
 			CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST  => 'POST',
@@ -100,15 +112,19 @@ class DiscordTarget extends Target
 			CURLOPT_MAXREDIRS      => 10,
 			CURLOPT_TIMEOUT        => 0,
 			CURLOPT_HTTPHEADER     => [
-				'Content-type: application/json',
+				'Content-type: multipart/form-data',
 				'User-agent: Yii2 Discord log target',
 			],
-			CURLOPT_POSTFIELDS     => json_encode(['content' => $message]),
-		]);
+			CURLOPT_POSTFIELDS     => ['file1' => $curlFile],
+			CURLOPT_RETURNTRANSFER => 1
 
+		]);
+		
 		curl_exec($ch);
 		$info = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
+
+		unlink($tempFilePath);		// delete the temp file
 
 		if ($info !== 204) {
 			throw new LogRuntimeException('Unable to export log through discord!');
