@@ -1,5 +1,5 @@
 {
-    "name": "betsuno/yii2-log-discord-target",
+    "name": "thtmorais/yii2-log-discord-target",
     "description": "Discord log target for Yii2",
     "version": "1.0",
     "type": "library",
@@ -13,11 +13,15 @@
         {
             "name":  "betsuno",
             "email": "betsuno.git@yandex.ru"
+        },
+        {
+            "name": "Matheus Evangelista Morais",
+            "email": "thtmorais@hotmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "betsuno\\yii\\log\\": "src/"
+            "betsuno\\log\\": "src/"
         }
     }
 }
