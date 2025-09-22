@@ -56,6 +56,8 @@ class DiscordTarget extends Target
 	public function export()
 	{
 		$resultMessage = [];
+		$prefix = Yii::$app->configuration->baseName;
+		
 		foreach ($this->messages as $message)
 		{
 			list($text, $level, $category, $timestamp) = $message;
@@ -68,6 +70,10 @@ class DiscordTarget extends Target
 					$text = VarDumper::export($text);
 				}
 			}
+
+			if ($prefix) {
+                $text = "[$prefix] " . $text;
+            }
 
 			$resultMessage[] = Yii::$app->i18n->format(
 				$this->pattern,
